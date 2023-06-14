@@ -21,15 +21,6 @@ maquina.append(0)
 
 print(maquina)
 
-"""
-Diccionario:
-0 for 0
-10 for 1
-110 for R
-1110 for L
-11110 for stop
-"""
-
 reglas=[]
 
 while len(maquina)>0: #mientras maquina no este vacia convertir binario a reglas
@@ -58,3 +49,30 @@ while len(maquina)>0: #mientras maquina no este vacia convertir binario a reglas
 
 print(reglas)
 print(maquina)
+
+reglasderecha=[]
+
+while len(reglas)>0: #separa las reglas en grupos
+    if reglas[0]=='R' or reglas[0]=='L' or reglas[0]=='STOP':
+        reglasaux=[]
+        reglasaux.append(0)
+        reglasaux.append(0)
+        reglasaux.append(reglas[0])
+        reglas.pop(0)
+        reglasderecha.append(reglasaux)
+    else:
+        reglasaux=[]
+        while reglas[0]!='R' and reglas[0]!='L' and reglas[0]!='STOP':
+            reglasaux.append(reglas[0])
+            reglas.pop(0)
+        reglasaux.append(reglas[0])
+        reglas.pop(0)
+        if len(reglasaux)<3:
+            reglasaux2=[0]
+            reglasaux2.append(reglasaux[0])
+            reglasaux2.append(reglasaux[1])
+            reglasaux=reglasaux2
+        reglasderecha.append(reglasaux)
+
+print(reglasderecha)
+print(reglas)
