@@ -1,11 +1,10 @@
-# xn+1= 450813704461563958982113775643437908
-# xn*2= 10389728107
-# un+1= 177642
-# un*2= 1492923420919872026917547669
+# xn+1=450813704461563958982113775643437908
+# xn*2=10389728107
+# un+1=177642
+# un*2=1492923420919872026917547669
 
 numeromaquina=450813704461563958982113775643437908
 binario=bin(numeromaquina).replace("0b","")
-print(binario)
 
 maquina=[] #maquina vacia y se agrega cada elemento R 110
 maquina.append(1)
@@ -15,11 +14,9 @@ maquina.append(0)
 for elemento in range(len(binario)):
     maquina.append(int(binario[elemento]))
 
-maquina.append(1)
+maquina.append(1) #se agrega la R final 110
 maquina.append(1)
 maquina.append(0)
-
-print(maquina)
 
 reglas=[]
 
@@ -47,13 +44,11 @@ while len(maquina)>0: #mientras maquina no este vacia convertir binario a reglas
         print('yes')
         break
 
-print(reglas)
-print(maquina)
 
 reglasderecha=[]
 
 while len(reglas)>0: #separa las reglas en grupos
-    if reglas[0]=='R' or reglas[0]=='L' or reglas[0]=='STOP':
+    if reglas[0]=='R' or reglas[0]=='L' or reglas[0]=='STOP': #si la cabeza de la lista solo es instruccion agrega 00
         reglasaux=[]
         reglasaux.append(0)
         reglasaux.append(0)
@@ -75,4 +70,46 @@ while len(reglas)>0: #separa las reglas en grupos
         reglasderecha.append(reglasaux)
 
 print(reglasderecha)
-print(reglas)
+
+largotabla=int(len(reglasderecha)/2)
+
+tabla=[[k for k in range(6)]for l in range(largotabla)] #crea una tabla, cada renglon sera un estado de la maquina
+
+cont=0
+for regla in range(len(reglasderecha)): #se ingresan reglas en tabla
+    if regla%2==0:
+        if len(reglasderecha[regla])<4:
+            auxiliar=reglasderecha[regla]
+            tabla[cont][0]=auxiliar[0]
+            tabla[cont][1]=auxiliar[1]
+            tabla[cont][2]=auxiliar[2]
+        else:
+            auxiliar=reglasderecha[regla]
+            tabla[cont][1]=auxiliar[-2]
+            tabla[cont][2]=auxiliar[-1]
+            auxiliar.pop(-1)
+            auxiliar.pop(-1)
+            auxiliar=[str(numero) for numero in auxiliar]
+            auxiliar="".join(auxiliar)
+            auxiliar=int(auxiliar,2)
+            tabla[cont][0]=auxiliar
+    else:
+        if len(reglasderecha[regla])<4:
+            auxiliar=reglasderecha[regla]
+            tabla[cont][3]=auxiliar[0]
+            tabla[cont][4]=auxiliar[1]
+            tabla[cont][5]=auxiliar[2]
+        else:
+            auxiliar=reglasderecha[regla]
+            tabla[cont][4]=auxiliar[-2]
+            tabla[cont][5]=auxiliar[-1]
+            auxiliar.pop(-1)
+            auxiliar.pop(-1)
+            auxiliar=[str(numero) for numero in auxiliar]
+            auxiliar="".join(auxiliar)
+            auxiliar=int(auxiliar,2)
+            tabla[cont][0]=auxiliar
+        cont+=1 
+
+print()
+print(tabla)
