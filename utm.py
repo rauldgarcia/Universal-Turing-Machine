@@ -3,7 +3,8 @@
 # un+1=177642
 # un*2=1492923420919872026917547669
 
-numeromaquina=450813704461563958982113775643437908
+numeromaquina=1492923420919872026917547669
+cadena=[0,1,1,1,0,0,0,0,0,0]
 binario=bin(numeromaquina).replace("0b","")
 
 maquina=[] #maquina vacia y se agrega cada elemento R 110
@@ -108,8 +109,43 @@ for regla in range(len(reglasderecha)): #se ingresan reglas en tabla
             auxiliar=[str(numero) for numero in auxiliar]
             auxiliar="".join(auxiliar)
             auxiliar=int(auxiliar,2)
-            tabla[cont][0]=auxiliar
+            tabla[cont][3]=auxiliar
         cont+=1 
-
+    
 print()
 print(tabla)
+print(cadena)
+
+estado=0
+casilla=0
+#casillanueva=0
+while estado!='STOP':
+    #print(cadena)
+    #print("estoy en estado ",estado)
+    #print("leyendo la casilla ",casilla," que contiene ",cadena[casilla])
+    if cadena[casilla]==0:
+        cadena[casilla]=tabla[estado][1]
+        if tabla[estado][2]=='R':
+            casilla+=1    
+        elif tabla[estado][2]=='L':
+            casilla-=1    
+        elif tabla[estado][2]=='STOP':
+            break
+        else:
+            print('yes')
+        estado=tabla[estado][0]   
+    else:
+        cadena[casilla]=tabla[estado][4]
+        if tabla[estado][5]=='R':
+            casilla+=1
+        elif tabla[estado][5]=='L':
+            casilla-=1
+        elif tabla[estado][5]=='STOP':
+            break
+        else:
+            print('yes')
+        estado=tabla[estado][3]
+    
+
+print()    
+print(cadena)
