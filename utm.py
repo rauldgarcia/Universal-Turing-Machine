@@ -3,8 +3,10 @@
 # un+1=177642
 # un*2=1492923420919872026917547669
 
-numeromaquina=1492923420919872026917547669
-cadena=[0,1,1,1,0,0,0,0,0,0]
+numeromaquina=int(input("Ingrese el número de la maquina de Turing en decimal:"))
+cadena=list(input("Ingrese la cadena a computar con el siguiente formato ejemplo 0111000000:"))
+for dato in range(len(cadena)):
+    cadena[dato]=int(cadena[dato])
 binario=bin(numeromaquina).replace("0b","")
 
 maquina=[] #maquina vacia y se agrega cada elemento R 110
@@ -42,9 +44,7 @@ while len(maquina)>0: #mientras maquina no este vacia convertir binario a reglas
         for i in range(5):
             maquina.pop(0)
     else:
-        print('yes')
         break
-
 
 reglasderecha=[]
 
@@ -69,8 +69,6 @@ while len(reglas)>0: #separa las reglas en grupos
             reglasaux2.append(reglasaux[1])
             reglasaux=reglasaux2
         reglasderecha.append(reglasaux)
-
-print(reglasderecha)
 
 largotabla=int(len(reglasderecha)/2)
 
@@ -112,17 +110,14 @@ for regla in range(len(reglasderecha)): #se ingresan reglas en tabla
             tabla[cont][3]=auxiliar
         cont+=1 
     
-print()
+print("\nTabla de reglas:")
 print(tabla)
+print("\nCadena original a computar:")
 print(cadena)
 
 estado=0
 casilla=0
-#casillanueva=0
 while estado!='STOP':
-    #print(cadena)
-    #print("estoy en estado ",estado)
-    #print("leyendo la casilla ",casilla," que contiene ",cadena[casilla])
     if cadena[casilla]==0:
         cadena[casilla]=tabla[estado][1]
         if tabla[estado][2]=='R':
@@ -143,9 +138,8 @@ while estado!='STOP':
         elif tabla[estado][5]=='STOP':
             break
         else:
-            print('yes')
+            break
         estado=tabla[estado][3]
     
-
-print()    
+print("\nCadena resultante:")    
 print(cadena)
