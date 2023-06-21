@@ -127,7 +127,7 @@ while estado!='STOP':
         elif tabla[estado][2]=='STOP':
             break
         else:
-            print('yes')
+            break
         estado=tabla[estado][0]   
     else:
         cadena[casilla]=tabla[estado][4]
